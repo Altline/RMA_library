@@ -4,7 +4,7 @@
   "description": "1. User registration and authentication\r 2. Searching books from the Google's book database\r 3. Adding books to the wishlist\r 4. Saving books to a personal bookshelf\r 5. Saving notes while reading\r 6. Marking books as read",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Altline/WEB_library/issues"
   },
-  "homepage": "https://github.com/Altline/WEB_library#readme"
+  "homepage": "https://github.com/Altline/WEB_library#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
 }
