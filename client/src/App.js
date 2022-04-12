@@ -19,7 +19,8 @@ export default function App() {
         </Routes>
       </main>
       <footer>
-
+          <p>Web programiranje, FERIT Osijek</p>
+          <p>Michael Šrempf, Dominik Živko</p>
       </footer>
     </div>
   );
