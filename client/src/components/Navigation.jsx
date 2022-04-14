@@ -22,10 +22,14 @@ export default function Navigation() {
                         <Nav.Link href="/bookshelf">Bookshelf</Nav.Link>
                         <Nav.Link href="/wishlist">Wishlist</Nav.Link>
                     </Nav>
+                    <Nav>
+                        <Nav.Link href="/login">Login</Nav.Link>
+                        <Nav.Link href="/register">Register</Nav.Link>
+                    </Nav>
                     <Form className="d-flex">
                         <FormControl
                             type="search"
-                            placeholder="Search"
+                            placeholder="Search books"
                             className="me-2"
                             aria-label="Search"
                         />

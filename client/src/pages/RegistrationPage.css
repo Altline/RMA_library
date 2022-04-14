@@ -1,0 +1,4 @@
+.checkbox > .form-check-input {
+    float: unset;
+    margin-right: 8px;
+}
