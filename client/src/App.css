@@ -5,7 +5,7 @@
   min-height: 100vh;
 }
 
-footer{
+footer {
   display: flex;
   position: static;
   bottom: 0;
@@ -13,6 +13,5 @@ footer{
   color: white;
   width: 100%;
   justify-content: space-between;
-  padding: 12px 20px;
-  height: 50px;  
+  padding: 15px 20px;
 }
