@@ -15,3 +15,7 @@ footer {
   justify-content: space-between;
   padding: 15px 20px;
 }
+
+.text-align-start {
+  text-align: start;
+}
