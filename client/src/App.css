@@ -1,20 +1,18 @@
 .App {
+  display: grid;
+  grid-template-rows: min-content auto min-content;
   text-align: center;
   min-height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-}
-
 footer{
   display: flex;
-  position: absolute;
-  bottom: 0%;
+  position: static;
+  bottom: 0;
   background-color: #282c34;
   color: white;
   width: 100%;
   justify-content: space-between;
-  padding: 10px;
+  padding: 12px 20px;
   height: 50px;  
 }

@@ -10,7 +10,7 @@ export default function Navigation() {
     return (
         <Navbar bg="light" expand="lg">
             <Container fluid>
-                <Navbar.Brand href="#">My library</Navbar.Brand>
+                <Navbar.Brand>My library</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav
@@ -23,7 +23,7 @@ export default function Navigation() {
                         <Nav.Link href="/wishlist">Wishlist</Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="/login">Login</Nav.Link>
+                        <Nav.Link href="/login">Log in</Nav.Link>
                         <Nav.Link href="/register">Register</Nav.Link>
                     </Nav>
                     <Form className="d-flex">
