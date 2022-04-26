@@ -2,11 +2,14 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
+import SearchForm from "./SearchForm";
 
 export default function Navigation() {
+
+    function onSearch(query) {
+        console.log(query);
+    }
+
     return (
         <Navbar bg="light" expand="lg">
             <Container fluid>
@@ -26,15 +29,7 @@ export default function Navigation() {
                         <Nav.Link href="/login">Log in</Nav.Link>
                         <Nav.Link href="/register">Register</Nav.Link>
                     </Nav>
-                    <Form className="d-flex">
-                        <FormControl
-                            type="search"
-                            placeholder="Search books"
-                            className="me-2"
-                            aria-label="Search"
-                        />
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
+                    <SearchForm onSearch={onSearch} />
                 </Navbar.Collapse>
             </Container>
         </Navbar>
