@@ -2,6 +2,7 @@ import Container from "react-bootstrap/esm/Container";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navigation from "./components/Navigation";
+import BookPage from "./pages/BookPage";
 import BookshelfPage from "./pages/BookshelfPage";
 import HomePage from "./pages/HomePage"
 import LoginPage from "./pages/LoginPage";
@@ -20,6 +21,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/bookshelf" element={<BookshelfPage />} />
             <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="/book/:bookId" element={<BookPage />} />
             <Route path="/register" element={<RegistrationPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Routes>

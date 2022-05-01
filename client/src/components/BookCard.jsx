@@ -7,7 +7,7 @@ export default function BookCard(props) {
     const book = props.book;
 
     return (
-        <Card className="book-card">
+        <Card className="book-card" onClick={_ => props.onClick(book)}>
             <Container>
                 <Row xs={1} md={2} className="justify-content-center justify-content-md-start">
                     <Col xs="auto" md="auto" style={{ alignSelf: "center" }}>
