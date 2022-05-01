@@ -20,6 +20,7 @@ export default function SearchForm(props) {
                 placeholder="Search books"
                 className="me-2"
                 aria-label="Search"
+                style={{minWidth: "400px"}}
                 value={query}
                 onChange={onSearchInputChange}
             />
