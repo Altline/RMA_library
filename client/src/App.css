@@ -5,6 +5,14 @@
   min-height: 100vh;
 }
 
+h1 {
+  font-size: 1.5rem !important;
+}
+
+h2 {
+  font-size: 1.25rem !important;
+}
+
 footer {
   display: flex;
   position: static;
