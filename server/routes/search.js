@@ -6,7 +6,13 @@ router.get("",getBooks)
 
 async function getBooks(req,res,next){
     var rawData;
-    await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${req.query.q}&maxResults=${req.query.maxResults}`)
+    const q=req.query.q;
+    const maxResults=req.query.maxResults;
+    var target=`https://www.googleapis.com/books/v1/volumes?q=${q}`;
+    if(maxResults!=null){
+        target=target.concat(`&maxResults=${maxResults}`);
+    }
+    await axios.get(target)
     .then(function(response){rawData=response.data})
     .catch(function (error) {console.log(error);})
 
