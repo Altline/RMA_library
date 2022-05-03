@@ -8,7 +8,9 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    BookApi.queryBooks("").then((res) => setBooks(res.items));
+    BookApi.queryBooks("Web programming").then((res) => {
+      setBooks(res.data.items)
+    });
   }, []);
 
   function onBookClick(book) {

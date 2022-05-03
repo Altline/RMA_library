@@ -1,6 +1,7 @@
 const axios = require("axios");
 
-const BASE_URL = "localhost:3001/"
+const BASE_URL = "http://localhost:3001/"
+axios.defaults.baseURL = BASE_URL;
 
 export default class BookApi {
 
@@ -9,8 +10,9 @@ export default class BookApi {
   }
 
   static async queryBooks(query) {
-    return sampleData;
+    return axios.get(`search?q=${query}`);
   }
+
 }
 
 const sampleBook = {
