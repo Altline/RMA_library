@@ -2,11 +2,11 @@ const express = require("express")
 const axios = require("axios")
 const router = express.Router()
 
-router.get("/:value",getBooks)
+router.get("",getBooks)
 
 async function getBooks(req,res,next){
     var rawData;
-    await axios.get("https://www.googleapis.com/books/v1/volumes?q="+req.params.value)
+    await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${req.query.q}&maxResults=${req.query.maxResults}`)
     .then(function(response){rawData=response.data})
     .catch(function (error) {console.log(error);})
 
