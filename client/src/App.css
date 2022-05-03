@@ -1,20 +1,51 @@
 .App {
+  display: grid;
+  grid-template-rows: min-content auto min-content;
   text-align: center;
   min-height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
+h1 {
+  font-size: 1.5rem !important;
 }
 
-footer{
+h2 {
+  font-size: 1.25rem !important;
+}
+
+footer {
   display: flex;
-  position: absolute;
-  bottom: 0%;
+  position: static;
+  bottom: 0;
   background-color: #282c34;
   color: white;
   width: 100%;
   justify-content: space-between;
+  padding: 15px 20px;
+}
+
+.text-align-start {
+  text-align: start;
+}
+
+.book-card {
+  margin: 20px;
   padding: 10px;
-  height: 50px;  
+  text-align: start;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.book-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.book-card .card-subtitle {
+  margin-bottom: 10px;
+}
+
+.book-card .card-text {
+  color: dimgray;
+  font-size: .9em;
 }
