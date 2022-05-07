@@ -1,4 +1,5 @@
 const express = require("express");
+const axios = require("axios")
 const PORT = process.env.PORT || 3001;
 const searchRouter = require("./routes/search")
 const app = express();
@@ -10,6 +11,36 @@ app.use(function(req, res, next) {
 });
 
 app.use("/search",searchRouter)
+
+app.get("/book/:id", getBook)
+
+async function getBook(req, res, next) {
+  const id = req.params.id;
+  var rawData;
+  var target = `https://www.googleapis.com/books/v1/volumes/${id}/`;
+  await axios.get(target)
+      .then(function (response) { rawData = response.data })
+      .catch(function (error) { console.log(error); })
+ 
+  const data = {
+      
+                  id: rawData.id ? rawData.id : "",
+                  selfLink: rawData.selfLink ? rawData.selfLink : "",
+                  title: rawData.volumeInfo.title ? rawData.volumeInfo.title : "",
+                  subtitle: rawData.volumeInfo.subtitle ? rawData.volumeInfo.subtitle : "",
+                  authors: rawData.volumeInfo.authors ? rawData.volumeInfo.authors : [],
+                  publisher: rawData.volumeInfo.publisher ? rawData.volumeInfo.publisher : "",
+                  publishedDate: rawData.volumeInfo.publishedDate ? rawData.volumeInfo.publishedDate : "",
+                  description: rawData.volumeInfo.description ? rawData.volumeInfo.description : "",
+                  categories: rawData.volumeInfo.categories ? rawData.volumeInfo.categories : [],
+                  imageLinks: rawData.imageLinks ? rawData.imageLinks : null
+           
+  };
+  res.json(data);
+  next()
+}
+
+
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
