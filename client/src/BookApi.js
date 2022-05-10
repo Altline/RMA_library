@@ -10,7 +10,7 @@ export default class BookApi {
   }
 
   static async queryBooks(query) {
-    return axios.get(`search?q=${query}`);
+    return axios.get("search", { params: { q: query } });
   }
 
 }
