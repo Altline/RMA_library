@@ -4,10 +4,10 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import SearchForm from "./SearchForm";
 
-export default function Navigation() {
+export default function Navigation(props) {
 
     function onSearch(query) {
-        console.log(query);
+        props.onSearch(query);
     }
 
     return (

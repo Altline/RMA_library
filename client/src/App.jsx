@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/esm/Container";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
+import BookApi from "./BookApi";
 import Navigation from "./components/Navigation";
 import BookPage from "./pages/BookPage";
 import BookshelfPage from "./pages/BookshelfPage";
@@ -10,15 +11,22 @@ import RegistrationPage from "./pages/RegistrationPage";
 import WishlistPage from "./pages/WishlistPage";
 
 export default function App() {
+  const navigate = useNavigate();
+
+  function onSearch(query) {
+    navigate(`/search/${query}`);
+  }
+
   return (
     <div className="App">
       <header>
-        <Navigation />
+        <Navigation onSearch={onSearch} />
       </header>
       <main>
         <Container className="my-4">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/search/:searchQuery" element={<HomePage />} />
             <Route path="/bookshelf" element={<BookshelfPage />} />
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/book/:bookId" element={<BookPage />} />

@@ -9,7 +9,7 @@ export default class BookApi {
     return axios.get(`book/${bookId}`);
   }
 
-  static async queryBooks(query) {
+  static async searchBooks(query) {
     return axios.get("search", { params: { q: query } });
   }
 
