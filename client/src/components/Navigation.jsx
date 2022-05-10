@@ -19,7 +19,6 @@ export default function Navigation(props) {
                     <Nav
                         className="me-auto my-2 my-lg-0"
                         style={{ maxHeight: "100px" }}
-                        basic-navbar-nav
                     >
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/bookshelf">Bookshelf</Nav.Link>
