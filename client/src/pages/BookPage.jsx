@@ -10,7 +10,7 @@ export default function BookPage() {
     const [book, setBook] = useState(null);
 
     useEffect(() => {
-        BookApi.getBook(bookId).then((res) => setBook(res));
+        BookApi.getBook(bookId).then((res) => setBook(res.data));
     }, []);
 
     return (
