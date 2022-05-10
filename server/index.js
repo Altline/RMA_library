@@ -1,8 +1,9 @@
 const PORT = process.env.PORT || 3001;
 
 const express = require("express");
-const axios = require("axios")
-const searchRouter = require("./routes/search")
+const axios = require("axios");
+const searchRouter = require("./routes/search");
+const { endpointWithPathArg } = require("./util");
 
 const app = express();
 
@@ -12,17 +13,15 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use("/search", searchRouter)
+app.use("/search", searchRouter);
 
-app.get("/book/:id", getBook)
+app.get("/book/:id", getBook);
 
 async function getBook(req, res, next) {
   const id = req.params.id;
 
-  var target = `https://www.googleapis.com/books/v1/volumes/${id}/`;
   var rawData;
-  
-  await axios.get(target)
+  await axios.get(endpointWithPathArg("volumes", id))
     .then(function (response) { rawData = response.data })
     .catch(function (error) { console.log(error); })
 
@@ -46,4 +45,3 @@ async function getBook(req, res, next) {
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
-
