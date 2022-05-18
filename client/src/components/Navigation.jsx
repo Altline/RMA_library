@@ -1,13 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import SearchForm from "./SearchForm";
+import { useAuth } from "../contexts/authContext";
+import { Button } from "react-bootstrap";
 
-export default function Navigation() {
+export default function Navigation(props) {
+    const {currentUser, logout} = useAuth()
+    const [error, setError] = useState()
 
     function onSearch(query) {
-        console.log(query);
+        props.onSearch(query);
+    }
+    async function handleLogout(e){
+        e.preventDefault() 
+        setError('')
+        try{
+           await logout()
+        }catch(error){
+            setError('Failed to logout')
+        }   
     }
 
     return (
@@ -19,15 +32,20 @@ export default function Navigation() {
                     <Nav
                         className="me-auto my-2 my-lg-0"
                         style={{ maxHeight: "100px" }}
-                        basic-navbar-nav
                     >
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/bookshelf">Bookshelf</Nav.Link>
                         <Nav.Link href="/wishlist">Wishlist</Nav.Link>
                     </Nav>
+                    <Navbar.Text>
+                        {currentUser && currentUser.email}
+                    </Navbar.Text>
+                    <Navbar.Text>
+                        {error}
+                    </Navbar.Text>
                     <Nav>
-                        <Nav.Link href="/login">Log in</Nav.Link>
-                        <Nav.Link href="/register">Register</Nav.Link>
+                        {currentUser===null ? <Nav.Link href="/login">Log in</Nav.Link> : <Button onClick={handleLogout}>Logout</Button> }
+                        
                     </Nav>
                     <SearchForm onSearch={onSearch} />
                 </Navbar.Collapse>

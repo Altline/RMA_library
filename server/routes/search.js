@@ -1,21 +1,21 @@
-const express = require("express")
-const axios = require("axios")
-const router = express.Router()
+const express = require("express");
+const axios = require("axios");
+const { endpoint } = require("../util");
+const router = express.Router();
 
-router.get("", getBooks)
+router.get("", getBooks);
 
 async function getBooks(req, res, next) {
     const q = req.query.q;
     const maxResults = req.query.maxResults;
 
     var rawData;
-    var target = `https://www.googleapis.com/books/v1/volumes?q=${q}`;
+    const params = {
+        q: q
+    };
+    if (maxResults) params.maxResults = maxResults;
 
-    if (maxResults != null) {
-        target = target.concat(`&maxResults=${maxResults}`);
-    }
-
-    await axios.get(target)
+    await axios.get(endpoint("volumes"), { params: params})
         .then(function (response) { rawData = response.data })
         .catch(function (error) { console.log(error); })
 
@@ -46,4 +46,4 @@ async function getBooks(req, res, next) {
     next()
 }
 
-module.exports = router
+module.exports = router;

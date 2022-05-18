@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Image, Row, ToggleButton } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import BookApi from "../BookApi";
 import Loading from "../components/Loading";
@@ -7,31 +7,73 @@ import ReactHtmlParser from "react-html-parser"
 
 export default function BookPage() {
     const { bookId } = useParams();
+
     const [book, setBook] = useState(null);
+    const [onBookshelf, setOnBookshelf] = useState(false);
+    const [onWishlist, setOnWishlist] = useState(false);
 
     useEffect(() => {
-        BookApi.getBook(bookId).then((res) => setBook(res));
+        BookApi.getBook(bookId).then((res) => setBook(res.data));
     }, []);
 
-    return (
-        <Container>
-            {book != null ?
-                <Row xs={1} md={2} className="justify-content-center justify-content-md-start">
-                    <Col xs="auto" md="auto" style={{ alignSelf: "center" }}>
-                        <Image src={book.imageLinks.thumbnail} />
-                    </Col>
-                    <Col md={9} xl={10} className="text-align-start">
-                        <h1>{book.title}</h1>
-                        <h2>
-                            {book.subtitle + " - "}
-                            <i>{book.authors.join(", ")}</i>
-                        </h2>
-                        <p>{ReactHtmlParser(book.description)}</p>
-                    </Col>
-                </Row>
+    function toggleBookshelf() {
+        
+    }
 
-                : <Loading />
-            }
-        </Container>
-    );
+    function toggleWishlist() {
+
+    }
+
+    if (book != null) return (
+        <Container>
+            <Row xs={1} md={2} className="gy-4 justify-content-center justify-content-md-start">
+                <Col xs="auto" md="auto">
+                    <Image src={book.imageLinks.thumbnail} />
+                </Col>
+                <Col md={9} xl={10} className="text-align-start">
+                    <h1>{book.title}</h1>
+                    <h2>
+                        {book.subtitle ? book.subtitle + " - " : ""}
+                        <i>{book.authors.join(", ")}</i>
+                    </h2>
+                    <p>{ReactHtmlParser(book.description)}</p>
+                    <div className="info-header">Categories</div>
+                    <p>{book.categories}</p>
+                </Col>
+            </Row>
+            <Row className="gx-5 my-3 justify-content-center">
+                <Col xs="auto">
+                    <div className="info-header">Publisher</div>
+                    <p>{book.publisher}</p>
+                </Col>
+                <Col xs="auto">
+                    <div className="info-header">Published on</div>
+                    <p>{book.publishedDate}</p>
+                </Col>
+            </Row>
+            <Row className="g-2 justify-content-center justify-content-md-end">
+                <Col xs="auto">
+                    <ToggleButton
+                        type="checkbox"
+                        variant="outline-primary"
+                        checked={onBookshelf}
+                        onClick={toggleBookshelf}
+                    >
+                        { onBookshelf ? "Remove from bookshelf" : "Add to bookshelf" }
+                    </ToggleButton>
+                </Col>
+                <Col xs="auto">
+                    <ToggleButton
+                        type="checkbox"
+                        variant="outline-primary"
+                        checked={onWishlist}
+                        onClick={toggleWishlist}
+                    >
+                        { onBookshelf ? "Remove from wishlist" : "Add to wishlist" }
+                    </ToggleButton>
+                </Col>
+            </Row>
+        </Container>);
+
+    else return <Loading />;
 }

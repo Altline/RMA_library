@@ -17,7 +17,7 @@ export default function BookCard(props) {
                         <Card.Body>
                             <Card.Title>{book.title}</Card.Title>
                             <Card.Subtitle>
-                                {book.subtitle + " - "}
+                                {book.subtitle ? book.subtitle + " - " : ""}
                                 <i>{book.authors.join(", ")}</i>
                             </Card.Subtitle>
                             <Card.Text>

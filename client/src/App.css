@@ -13,6 +13,11 @@ h2 {
   font-size: 1.25rem !important;
 }
 
+.info-header {
+  color: gray;
+  font-weight: bold;
+}
+
 footer {
   display: flex;
   position: static;

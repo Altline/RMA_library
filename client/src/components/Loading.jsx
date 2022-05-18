@@ -1,7 +1,10 @@
-import { Image } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
 
 export default function Loading() {
     return (
-        <Image src="../logo192.png"/>
+        <Container>
+            <p>Loading...</p>
+            <Image src="../logo192.png"/>
+        </Container>
     );
 }
