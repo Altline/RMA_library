@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -7,20 +7,20 @@ import { useAuth } from "../contexts/authContext";
 import { Button } from "react-bootstrap";
 
 export default function Navigation(props) {
-    const {currentUser, logout} = useAuth()
+    const { currentUser, logout } = useAuth()
     const [error, setError] = useState()
 
     function onSearch(query) {
         props.onSearch(query);
     }
-    async function handleLogout(e){
-        e.preventDefault() 
+    async function handleLogout(e) {
+        e.preventDefault()
         setError('')
-        try{
-           await logout()
-        }catch(error){
+        try {
+            await logout()
+        } catch (error) {
             setError('Failed to logout')
-        }   
+        }
     }
 
     return (
@@ -43,9 +43,9 @@ export default function Navigation(props) {
                     <Navbar.Text>
                         {error}
                     </Navbar.Text>
-                    <Nav>
-                        {currentUser===null ? <Nav.Link href="/login">Log in</Nav.Link> : <Button onClick={handleLogout}>Logout</Button> }
-                        
+                    <Nav className="mx-2">
+                        {currentUser ? <Button onClick={handleLogout}>Logout</Button> : <Nav.Link href="/login">Log in</Nav.Link>}
+                        {!currentUser && <Nav.Link href="/register">Register</Nav.Link>}
                     </Nav>
                     <SearchForm onSearch={onSearch} />
                 </Navbar.Collapse>

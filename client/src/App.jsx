@@ -1,7 +1,6 @@
 import Container from "react-bootstrap/esm/Container";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
-import BookApi from "./BookApi";
 import Navigation from "./components/Navigation";
 import { AuthProvider } from "./contexts/authContext";
 import BookPage from "./pages/BookPage";
