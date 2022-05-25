@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Col, Container, Image, Row, ToggleButton } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import BookApi from "../BookApi";
 import Loading from "../components/Loading";
 import ReactHtmlParser from "react-html-parser"
+import { getBook, setOnBookShelfDB, setOnWishlistDB } from "../firebase/firebasedb";
+import { async } from "@firebase/util";
 
 export default function BookPage() {
     const { bookId } = useParams();
@@ -12,16 +14,34 @@ export default function BookPage() {
     const [onBookshelf, setOnBookshelf] = useState(false);
     const [onWishlist, setOnWishlist] = useState(false);
 
+
     useEffect(() => {
         BookApi.getBook(bookId).then((res) => setBook(res.data));
+        
     }, []);
 
+    useEffect(() => {    
+        bookStatus()
+      });
+
+    async function bookStatus(){
+        var bookStatus = await getBook(bookId)
+        if(bookStatus.wishlist) setOnWishlist(true)
+        if(bookStatus.bookShelf)setOnBookshelf(true)
+        console.log(bookStatus)
+    }
+
     function toggleBookshelf() {
-        
+        console.log("prije promjene "+ onBookshelf)
+        setOnBookShelfDB(bookId, !onBookshelf)
+        setOnBookshelf(onBookshelf => !onBookshelf)
+
     }
 
     function toggleWishlist() {
-
+        console.log("prije promjene "+ onWishlist)
+        setOnWishlistDB(bookId, !onWishlist)
+        setOnWishlist(onWishlist => !onWishlist)
     }
 
     if (book != null) return (
@@ -69,7 +89,7 @@ export default function BookPage() {
                         checked={onWishlist}
                         onClick={toggleWishlist}
                     >
-                        { onBookshelf ? "Remove from wishlist" : "Add to wishlist" }
+                        { onWishlist ? "Remove from wishlist" : "Add to wishlist" }
                     </ToggleButton>
                 </Col>
             </Row>

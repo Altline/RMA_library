@@ -25,7 +25,6 @@ export default function RegistrationPage() {
             setError('')
             setLoading(true) 
             await signup(emailRef.current.value,passwordRef.current.value)
-            setUserDB(currentUser.uid);
             navigate('/')
         }catch{
             setError("Failed to create account")
