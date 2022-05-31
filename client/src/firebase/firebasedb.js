@@ -1,4 +1,5 @@
-import { getFirestore, collection, setDoc, doc, getDoc, getDocs } from "firebase/firestore"
+import { async } from "@firebase/util";
+import { getFirestore, collection, setDoc, doc, getDoc, getDocs, addDoc, deleteDoc } from "firebase/firestore"
 import app from "./firebase"
 
 const db = getFirestore(app)
@@ -63,6 +64,36 @@ export async function setOnWishlistDB(bookId, status) {
         await setDoc(documentRef, {
             wishlist: status
         }, { merge: true })
+    }
+}
+
+export async function addNoteForBook(bookId,text){
+    if(booksRef){
+        const documentRef = collection(booksRef, bookId, "notes");
+        await addDoc(documentRef, {
+            timestamp: Date.now(),
+            note: text
+        })
+    }
+}
+
+
+export async function deleteNote(bookId, noteId){
+    if(booksRef){
+        const documentRef = doc(booksRef, bookId, "notes", noteId);
+        await deleteDoc(documentRef);
+    }
+}
+
+export async function getNotes(bookId){
+    if(booksRef){
+        var notes = [];
+        const collectionRef = collection(booksRef, bookId, "notes");
+        const noteDocs = await getDocs(collectionRef);
+        noteDocs.forEach(e => {  
+                notes.push({"id":e.id, "note": e.data().note, "timestamp": e.data().timestamp})
+        })
+        return notes;
     }
 }
 
