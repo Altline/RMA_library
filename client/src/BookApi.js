@@ -11,8 +11,8 @@ export default class BookApi {
     return axios.get(`book/${bookId}`);
   }
 
-  static async searchBooks(query) {
-    return axios.get("search", { params: { q: query } });
+  static async searchBooks(query, startIndex, maxResults) {
+    return axios.get("search", { params: { q: query, startIndex: startIndex, maxResults: maxResults } });
   }
 
   static async getBookShelf() {
