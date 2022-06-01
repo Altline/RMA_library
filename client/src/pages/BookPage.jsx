@@ -64,7 +64,7 @@ export default function BookPage() {
 
             <Row xs={1} md={2} className="gy-4 justify-content-center justify-content-md-start">
                 <Col xs="auto" md="auto">
-                    <Image src={book.imageLinks.thumbnail} />
+                    <Image src={book.imageLinks && book.imageLinks.thumbnail} />
                 </Col>
                 <Col md={9} xl={10} className="text-align-start">
                     <h1>{book.title}</h1>
