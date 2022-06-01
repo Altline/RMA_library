@@ -11,26 +11,26 @@ export default class BookApi {
     return axios.get(`book/${bookId}`);
   }
 
-  static async searchBooks(query) {
-    return axios.get("search", { params: { q: query } });
+  static async searchBooks(query, startIndex, maxResults) {
+    return axios.get("search", { params: { q: query, startIndex: startIndex, maxResults: maxResults } });
   }
 
   static async getBookShelf() {
-    var result = [];
+    const result = [];
     const docs = await getBookShelf();
     for (const e of docs) {
       const book = await this.getBook(e.id);
-      result = result.concat(book.data);
+      result.push(book.data);
     }
     return result;
   }
 
   static async getWishlist() {
-    var result = [];
+    const result = [];
     const docs = await getWishlist();
     for (const e of docs) {
       const book = await this.getBook(e.id);
-      result = result.concat(book.data);
+      result.push(book.data);
     }
     return result;
   }

@@ -7,12 +7,14 @@ router.get("", getBooks);
 
 async function getBooks(req, res, next) {
     const q = req.query.q;
+    const startIndex = req.query.startIndex;
     const maxResults = req.query.maxResults;
 
     var rawData;
     const params = {
         q: q
     };
+    if (startIndex) params.startIndex = startIndex;
     if (maxResults) params.maxResults = maxResults;
 
     await axios.get(endpoint("volumes"), { params: params})
