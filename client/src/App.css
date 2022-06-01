@@ -54,3 +54,19 @@ footer {
   color: dimgray;
   font-size: .9em;
 }
+
+.book-note {
+  text-align: start;
+  margin-bottom: 15px;
+}
+
+.book-note .card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-note .card-title {
+  font-size: 1em;
+  font-weight: 600;
+}

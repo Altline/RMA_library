@@ -16,21 +16,21 @@ export default class BookApi {
   }
 
   static async getBookShelf() {
-    var result = [];
+    const result = [];
     const docs = await getBookShelf();
     for (const e of docs) {
       const book = await this.getBook(e.id);
-      result = result.concat(book.data);
+      result.push(book.data);
     }
     return result;
   }
 
   static async getWishlist() {
-    var result = [];
+    const result = [];
     const docs = await getWishlist();
     for (const e of docs) {
       const book = await this.getBook(e.id);
-      result = result.concat(book.data);
+      result.push(book.data);
     }
     return result;
   }
