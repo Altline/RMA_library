@@ -28,8 +28,10 @@ export default function BookPage() {
         if (currentUser) {
             var bookStatus = await getBook(bookId)
             if (bookStatus) {
-                const fetchedNotes = await getNotes(bookId);
-                setNotes(fetchedNotes);
+                if (bookStatus.bookShelf) {
+                    const fetchedNotes = await getNotes(bookId);
+                    setNotes(fetchedNotes);
+                }
                 setOnWishlist(bookStatus.wishlist === true)
                 setOnBookshelf(bookStatus.bookShelf === true)
             }
@@ -89,8 +91,8 @@ export default function BookPage() {
                 </Col>
             </Row>
 
-            {currentUser
-                && <Row className="g-2 justify-content-center justify-content-md-end">
+            {currentUser &&
+                <Row className="g-2 justify-content-center justify-content-md-end">
                     <Col xs="auto">
                         <ToggleButton
                             type="checkbox"
@@ -114,35 +116,39 @@ export default function BookPage() {
                 </Row>
             }
 
-            <Row className="text-align-start">
-                <h5>Notes</h5>
-            </Row>
+            {onBookshelf &&
+                <div>
+                    <Row className="text-align-start">
+                        <h5>Notes</h5>
+                    </Row>
 
-            <Row className="my-4">
-                {notes && notes.length !== 0
-                    ? <NoteList notes={notes} onDeleteNote={onDeleteNote} />
-                    : <div style={{ color: "gray" }}>No notes</div>
-                }
-            </Row>
+                    <Row className="my-4">
+                        {notes && notes.length !== 0
+                            ? <NoteList notes={notes} onDeleteNote={onDeleteNote} />
+                            : <div style={{ color: "gray" }}>No notes</div>
+                        }
+                    </Row>
 
-            <Form
-                className="mx-5 py-2 text-align-start"
-                onSubmit={newNote}
-            >
-                <Form.Group>
-                    <Form.Label>New note</Form.Label>
-                    <Form.Control as="textarea" placeholder="Note text" value={newNoteText} onChange={(e) => setNewNoteText(e.target.value)} />
-                </Form.Group>
+                    <Form
+                        className="mx-5 py-2 text-align-start"
+                        onSubmit={newNote}
+                    >
+                        <Form.Group>
+                            <Form.Label>New note</Form.Label>
+                            <Form.Control as="textarea" placeholder="Note text" value={newNoteText} onChange={(e) => setNewNoteText(e.target.value)} />
+                        </Form.Group>
 
-                <Row>
-                    <Col xs="auto">
-                        <Button disabled={newNoteText.length === 0} variant="primary" type="submit" className="w-100 text-center mt-2">
-                            Save note
-                        </Button>
-                    </Col>
-                </Row>
-            </Form>
+                        <Row>
+                            <Col xs="auto">
+                                <Button disabled={newNoteText.length === 0} variant="primary" type="submit" className="w-100 text-center mt-2">
+                                    Save note
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form>
 
+                </div>
+            }
         </Container>);
 
     else return <Loading />;
