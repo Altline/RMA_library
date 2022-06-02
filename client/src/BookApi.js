@@ -17,20 +17,34 @@ export default class BookApi {
 
   static async getBookShelf() {
     const result = [];
+    const promises = [];
     const docs = await getBookShelf();
     for (const e of docs) {
-      const book = await this.getBook(e.id);
-      result.push(book.data);
+      const bookPromise = this.getBook(e.id);
+      bookPromise.then(e => {
+        result.push(e.data);
+      })
+      promises.push(bookPromise);
+    }
+    for (const p of promises) {
+      await p;
     }
     return result;
   }
 
   static async getWishlist() {
     const result = [];
+    const promises = [];
     const docs = await getWishlist();
     for (const e of docs) {
-      const book = await this.getBook(e.id);
-      result.push(book.data);
+      const bookPromise = this.getBook(e.id);
+      bookPromise.then(e => {
+        result.push(e.data);
+      })
+      promises.push(bookPromise);
+    }
+    for (const p of promises) {
+      await p;
     }
     return result;
   }
